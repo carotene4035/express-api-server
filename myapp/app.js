@@ -5,8 +5,11 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 
+/** ミドルウェアがかかれているファイル */
+/** ミドルウェアとは、ルーティングで振り分けた先の処理 */
 var index = require('./routes/index');
 var users = require('./routes/users');
+var samples = require('./routes/samples');
 
 var app = express();
 
@@ -22,8 +25,10 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
+/** routing定義 */
 app.use('/', index);
 app.use('/users', users);
+app.use('/samples', samples);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
